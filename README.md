@@ -26,8 +26,9 @@ classify_intent (Haiku — fast, cheap)
 
 ## Setup
 
+### Backend
+
 ```bash
-# Clone and install
 cd travel-planner
 pip install -r requirements.txt
 
@@ -35,11 +36,22 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env with your Anthropic API key
 
-# Run
 python app.py
 ```
 
-Server starts at `http://localhost:8000`.
+API runs at `http://localhost:8000`.
+
+### Frontend (Next.js)
+
+```bash
+cd frontend
+cp .env.local.example .env.local
+npm install
+npm run dev
+```
+
+UI runs at `http://localhost:3000` and talks to the backend via WebSocket (`/ws/chat`).
+Set `NEXT_PUBLIC_API_URL` if the API is not on localhost:8000.
 
 ## API Endpoints
 
@@ -71,6 +83,11 @@ travel-planner/
 ├── app.py                     # FastAPI endpoints
 ├── requirements.txt
 ├── .env.example
+├── frontend/                  # Next.js UI (App Router, Tailwind)
+│   └── src/
+│       ├── app/               # Routes and layout
+│       ├── components/        # Chat + itinerary UI
+│       └── hooks/             # WebSocket client
 ├── backend/
 │   ├── state.py               # PlannerState schema
 │   ├── llm.py                 # Model configuration
@@ -89,4 +106,4 @@ travel-planner/
 - [ ] Add weather API integration
 - [ ] Swap MemorySaver for PostgresSaver (persistence across restarts)
 - [ ] Add rate limiting and auth
-- [ ] Build React frontend
+- [x] Next.js frontend (streaming chat + itinerary panel)

@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4efe8;
+  --surface: #fffdf9;
+  --wash: #efe7dc;
+  --ink: #12303c;
+  --muted: #52707b;
+  --border: #d9cdb7;
+  --accent: #0b5d7a;
+  --accent-hover: #073047;
+  --accent-muted: #2f8ba3;
+  --hero-sub: #e9d9b2;
+  --gold: #c7a76a;
+  --gold-soft: #f3ebdb;
+  --shadow: 0 18px 40px rgba(10, 45, 60, 0.09), 0 4px 12px rgba(10, 45, 60, 0.04);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-fraunces);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--ink);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+.trip-hero {
+  background: linear-gradient(
+    135deg,
+    #0a3a52 0%,
+    #0b5f7e 28%,
+    #073047 100%
+  );
+}
+
+.trip-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(64, 210, 225, 0.28), transparent 45%),
+    radial-gradient(circle at 10% 90%, rgba(199, 167, 106, 0.18), transparent 32%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.04), transparent 40%);
+  pointer-events: none;
+}
+
+body {
+  background:
+    radial-gradient(circle at top, rgba(199, 167, 106, 0.08), transparent 30%),
+    var(--background);
+}
+
+/* ── Premium accents ─────────────────────────────────────────── */
+
+.text-gold {
+  background: linear-gradient(100deg, #a8843f 0%, #d9bd7f 45%, #a8843f 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-sheen 6s ease-in-out infinite;
+}
+
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Fine film grain so flat gradients feel printed rather than digital */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.trip-hero::after {
+  animation: hero-drift 18s ease-in-out infinite alternate;
+}
+
+/* With a destination photo, drop the turquoise glow so the photo keeps its true colours */
+.trip-hero.has-photo::after {
+  display: none;
+}
+
+.trip-hero.has-photo h1,
+.trip-hero.has-photo p {
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
+}
+
+.trip-hero.has-photo .hero-eyebrow {
+  color: #f3e3b8;
+}
+
+.animate-rise {
+  animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes gold-sheen {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.15) translate3d(-3%, 2%, 0);
+  }
+}
+
+/* Destination photo fades in with a slow settle, like a camera easing back */
+.hero-photo {
+  animation: hero-photo-in 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes hero-photo-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.activity-photo {
+  animation: activity-photo-in 0.6s ease-out both;
+}
+
+@keyframes activity-photo-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Palm fronds sway gently from the corner they hang off */
+.frond-sway {
+  animation: frond-sway 9s ease-in-out infinite alternate;
+}
+
+.frond-sway-right {
+  transform-origin: top right;
+}
+
+.frond-sway-left {
+  transform-origin: bottom left;
+  animation-duration: 11s;
+  animation-delay: -4s;
+}
+
+@keyframes frond-sway {
+  from {
+    transform: rotate(-1.5deg);
+  }
+  to {
+    transform: rotate(1.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gold,
+  .trip-hero::after,
+  .animate-rise,
+  .hero-photo,
+  .activity-photo,
+  .frond-sway {
+    animation: none;
+  }
+}

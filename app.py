@@ -19,6 +19,11 @@ from langchain_core.messages import HumanMessage
 
 from backend.graph import build_graph
 
+
+# Graph nodes whose LLM output is written for the user and safe to stream token-by-token.
+STREAMABLE_NODES = {"general_chat"}
+
+
 # ── App setup ──────────────────────────────────────────────────
 app = FastAPI(
     title="Travel Planner API",
@@ -116,10 +121,15 @@ async def websocket_chat(ws: WebSocket):
             ):
                 kind = event["event"]
 
-                # Stream LLM tokens as they arrive
+                # Stream tokens only from nodes whose LLM output is user-facing prose.
+                # Other nodes (classifier, extractor, planner, refiner) emit labels/JSON;
+                # their readable summaries arrive via the final "result" event.
                 if kind == "on_chat_model_stream":
+                    node = event.get("metadata", {}).get("langgraph_node")
+                    if node not in STREAMABLE_NODES:
+                        continue
                     chunk = event["data"].get("chunk")
-                    if chunk and hasattr(chunk, "content") and chunk.content:
+                    if chunk and hasattr(chunk, "content") and isinstance(chunk.content, str) and chunk.content:
                         full_response += chunk.content
                         await ws.send_json({
                             "type": "token",
@@ -142,20 +152,25 @@ async def websocket_chat(ws: WebSocket):
                             "content": status_map[node_name],
                         })
 
-            # Send final result with structured data
-            # Retrieve the latest state to get itinerary
+            # Send final result with structured data while keeping machine JSON off the client.
             try:
                 snapshot = agent.get_state(config)
                 current_state = snapshot.values
                 itinerary = current_state.get("itinerary")
                 intent = current_state.get("intent")
+                ai_messages = [m for m in current_state.get("messages", []) if getattr(m, "type", None) == "ai"]
+                if ai_messages:
+                    final_response = ai_messages[-1].content
+                else:
+                    final_response = full_response
             except Exception:
                 itinerary = None
                 intent = None
+                final_response = full_response
 
             await ws.send_json({
                 "type": "result",
-                "content": full_response,
+                "content": final_response,
                 "intent": intent,
                 "itinerary": itinerary,
             })
