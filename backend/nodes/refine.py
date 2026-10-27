@@ -28,6 +28,9 @@ RULES:
 - Keep the same JSON structure
 - Maintain realistic timing and geographic grouping
 - If swapping days, renumber appropriately
+- Keep each existing activity's "address". Give new activities an "address" too: the full
+  street address only if you are certain of it, otherwise neighborhood, city, and country.
+  Never invent a street number.
 
 Return the COMPLETE updated itinerary as a JSON array (same format as input).
 Return ONLY the JSON array. No markdown, no explanation."""

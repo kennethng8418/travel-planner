@@ -1,26 +1,12 @@
 "use client";
 
+import {
+  activityStyle,
+  activityTypeKey,
+  googleMapsUrl,
+} from "@/lib/activityStyle";
 import type { ActivityPhoto, ItineraryActivity } from "@/lib/types";
-
-// Muted, palette-matched tones so every category sits inside the cream/green/gold scheme.
-const TYPE_STYLES: Record<string, { badge: string; dot: string }> = {
-  food: { badge: "bg-[#f6ecd6] text-[#7a5a1e]", dot: "bg-[#c7a76a]" },
-  sightseeing: { badge: "bg-[#dcf1f5] text-[#0b5d7a]", dot: "bg-[#1596b0]" },
-  culture: { badge: "bg-[#efe6ee] text-[#5b3a58]", dot: "bg-[#8a5a86]" },
-  nature: { badge: "bg-[#e6eee2] text-[#3d5a34]", dot: "bg-[#6b8f5e]" },
-  history: { badge: "bg-[#ece6dc] text-[#5a4d3b]", dot: "bg-[#8c7a5f]" },
-  shopping: { badge: "bg-[#f3e4df] text-[#7a3f33]", dot: "bg-[#b86b5a]" },
-  transport: { badge: "bg-[#e6e9ea] text-[#3d4a4f]", dot: "bg-[#6d7c82]" },
-};
-
-const FALLBACK_STYLE = {
-  badge: "bg-[#dcf1f5] text-[#0b5d7a]",
-  dot: "bg-[var(--accent)]",
-};
-
-function typeKey(type?: string) {
-  return (type ?? "other").split("|")[0]?.trim().toLowerCase() ?? "other";
-}
+import { placeFromActivityName } from "@/lib/wikiPhotos";
 
 /**
  * Wide photo across the top of the card on phones, square tile on the left from `sm` up.
@@ -93,18 +79,23 @@ export function ActivityCard({
   index?: number;
   photo: ActivityPhoto | null | undefined;
 }) {
-  const key = typeKey(activity.type);
-  const style = TYPE_STYLES[key] ?? FALLBACK_STYLE;
+  const key = activityTypeKey(activity.type);
+  const style = activityStyle(activity.type);
 
   return (
     <article
       className="animate-rise group relative flex gap-4"
       style={{ animationDelay: `${index * 70}ms` }}
     >
-      {/* Centred on the timeline's 2px border: parent padding (pl-5 / sm:pl-6) + 1px + half the 12px dot */}
+      {/* Numbered to match the day map's pins. Centred on the timeline's 2px border:
+          parent padding (pl-5 / sm:pl-6) + 1px + half the 20px dot */}
       <span
-        className={`absolute -left-[27px] top-2 h-3 w-3 rounded-full ring-4 ring-[var(--surface)] transition-transform duration-300 group-hover:scale-125 sm:-left-[31px] ${style.dot}`}
-      />
+        aria-hidden
+        className="absolute -left-[31px] top-1 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white ring-4 ring-[var(--surface)] transition-transform duration-300 group-hover:scale-110 sm:-left-[35px]"
+        style={{ backgroundColor: style.color }}
+      >
+        {index + 1}
+      </span>
       <div className="flex w-14 shrink-0 flex-col items-end pt-1">
         <time className="font-mono text-sm font-semibold tabular-nums text-[var(--accent)]">
           {activity.time}
@@ -124,6 +115,34 @@ export function ActivityCard({
                 {key}
               </span>
             </div>
+            {activity.address ? (
+              <a
+                href={googleMapsUrl(
+                  placeFromActivityName(activity.name) || activity.name,
+                  activity.address,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1.5 inline-flex items-start gap-1.5 text-xs text-[var(--accent-muted)] transition-colors hover:text-[var(--accent)]"
+              >
+                <svg
+                  aria-hidden
+                  viewBox="0 0 24 24"
+                  className="mt-px h-3.5 w-3.5 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 21s-7-6.1-7-11.5a7 7 0 0 1 14 0C19 14.9 12 21 12 21Z" />
+                  <circle cx="12" cy="9.5" r="2.5" />
+                </svg>
+                <span className="underline decoration-transparent underline-offset-2 transition-colors hover:decoration-current">
+                  {activity.address}
+                </span>
+              </a>
+            ) : null}
             <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
               {activity.description}
             </p>

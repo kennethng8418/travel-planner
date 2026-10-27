@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import type { ItineraryDay } from "@/lib/types";
 import { countActivitiesByType, type TripMeta } from "@/lib/tripMeta";
 import { ActivityCard } from "@/components/ActivityCard";
+import { DayMap } from "@/components/DayMap";
+import { useActivityLocations } from "@/hooks/useActivityLocations";
 import { useActivityPhotos } from "@/hooks/useActivityPhotos";
 import { useDestinationPhoto } from "@/hooks/useDestinationPhoto";
 
@@ -38,6 +40,20 @@ export function ItineraryView({
     active?.activities ?? [],
     meta.destination,
   );
+  const locations = useActivityLocations(
+    active?.activities ?? [],
+    meta.destination,
+  );
+  const mapStops = locations
+    ? (active?.activities ?? []).map((a, i) => ({
+        number: i + 1,
+        name: a.name,
+        time: a.time,
+        address: a.address,
+        type: a.type,
+        coords: locations[a.name] ?? null,
+      }))
+    : null;
   const destination = meta.destination ?? "Your trip";
   const duration = meta.durationDays ?? days.length;
 
@@ -163,6 +179,8 @@ export function ItineraryView({
               {active.activities?.length ?? 0} moments planned
             </p>
           </header>
+
+          <DayMap stops={mapStops} />
 
           {/* Keyed by day so the timeline re-animates on every day switch */}
           <div

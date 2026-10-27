@@ -24,7 +24,7 @@ class TravelPreferences(TypedDict, total=False):
 class ItineraryDay(TypedDict, total=False):
     day: int
     title: str
-    activities: list[dict]  # {time, name, description, location, type}
+    activities: list[dict]  # {time, name, description, address, type}
     notes: str
 
 

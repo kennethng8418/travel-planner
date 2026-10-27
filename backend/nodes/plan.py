@@ -26,6 +26,10 @@ RULES:
 - Consider opening hours and best times to visit
 - Balance busy and relaxed days
 - Group geographically close activities together
+- Give every activity an "address" that a map search can find. Use the full street
+  address only for places whose address you are certain of (major landmarks, museums,
+  well-known restaurants). Otherwise give just the neighborhood, city, and country
+  (e.g. "Asakusa, Taito City, Tokyo, Japan"). Never invent a street number.
 
 Return ONLY valid JSON in this format:
 [
@@ -37,6 +41,7 @@ Return ONLY valid JSON in this format:
                 "time": "09:00",
                 "name": "Place or Activity Name",
                 "description": "Brief description and tips",
+                "address": "Street address, or neighborhood, city, country if unsure",
                 "type": "sightseeing | food | culture | nature | shopping | transport"
             }}
         ],

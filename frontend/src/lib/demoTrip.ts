@@ -16,6 +16,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "09:00",
         name: "Senso-ji Temple",
+        address: "2-3-1 Asakusa, Taito City, Tokyo, Japan",
         description:
           "Tokyo's oldest and most iconic Buddhist temple. Arrive early to beat the crowds. Walk through Kaminarimon Gate and Nakamise shopping street for souvenirs and traditional snacks.",
         type: "culture",
@@ -23,6 +24,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "10:30",
         name: "Asakusa Neighborhood Stroll",
+        address: "Asakusa, Taito City, Tokyo, Japan",
         description:
           "Wander the backstreets of Asakusa to discover old-school Tokyo vibes, traditional craft shops, and local shrines. Visit Dempoin Street for a quieter, historic atmosphere.",
         type: "sightseeing",
@@ -30,6 +32,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "12:00",
         name: "Lunch at Asakusa Mugimaru (Ramen)",
+        address: "Asakusa, Taito City, Tokyo, Japan",
         description:
           "Enjoy a bowl of classic Tokyo-style shoyu ramen in a cozy local setting. Expect a short queue — it moves quickly. Try the chashu pork topping.",
         type: "food",
@@ -37,6 +40,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "13:30",
         name: "Ueno Park & Tokyo National Museum",
+        address: "13-9 Uenokoen, Taito City, Tokyo, Japan",
         description:
           "A 15-minute walk or short taxi ride from Asakusa. Stroll through Ueno Park then visit the Tokyo National Museum to explore Japanese art, samurai armor, and ancient artifacts. Allow 1.5–2 hours inside.",
         type: "culture",
@@ -44,6 +48,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "16:00",
         name: "Yanaka Ginza — Old Tokyo Neighborhood",
+        address: "Yanaka, Taito City, Tokyo, Japan",
         description:
           "Walk or take a short train ride to Yanaka, one of Tokyo's best-preserved historic neighborhoods. Browse the retro shotengai (shopping street), try local street food, and soak in the pre-war Tokyo atmosphere.",
         type: "sightseeing",
@@ -51,6 +56,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "19:00",
         name: "Dinner at Fuunji (Tsukemen Ramen, Shinjuku area)",
+        address: "Yoyogi, Shibuya City, Tokyo, Japan",
         description:
           "Head to Shinjuku for dinner at Fuunji, famous for its rich, umami-packed tsukemen (dipping ramen). Arrive by 18:30 to minimize wait time. Lines form quickly but move fast.",
         type: "food",
@@ -66,6 +72,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "08:30",
         name: "Meiji Jingu Shrine",
+        address: "1-1 Yoyogikamizonocho, Shibuya City, Tokyo, Japan",
         description:
           "Start your morning at this serene Shinto shrine set within a forested park in the heart of the city. Walk the gravel path through towering torii gates. Peaceful and uncrowded in the early morning. Allow 45–60 minutes.",
         type: "culture",
@@ -73,6 +80,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "10:00",
         name: "Harajuku Neighborhood Exploration",
+        address: "Jingumae, Shibuya City, Tokyo, Japan",
         description:
           "Explore Takeshita Street for quirky pop culture and youth fashion, then walk down the adjacent Omotesando boulevard for high-end boutiques and beautiful tree-lined architecture.",
         type: "sightseeing",
@@ -80,6 +88,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "12:00",
         name: "Lunch at Afuri Ramen (Harajuku)",
+        address: "Jingumae, Shibuya City, Tokyo, Japan",
         description:
           "Afuri is famous for its light yuzu-shio (citrus salt) ramen — a refreshing contrast to heavier styles. The Harajuku branch is conveniently located and has a modern, stylish interior.",
         type: "food",
@@ -87,6 +96,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "13:30",
         name: "Shinjuku Gyoen National Garden",
+        address: "11 Naitomachi, Shinjuku City, Tokyo, Japan",
         description:
           "A 15-minute walk or short train ride to one of Tokyo's most beautiful gardens. Blend of French, English, and Japanese garden styles. Perfect for a relaxed afternoon walk. Closes at 16:30 (last entry 16:00).",
         type: "nature",
@@ -94,6 +104,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "16:30",
         name: "Golden Gai & Kabukicho Exploration",
+        address: "Kabukicho, Shinjuku City, Tokyo, Japan",
         description:
           "Explore the narrow alleys of Golden Gai in Shinjuku — a maze of tiny atmospheric bars. Browse the area at dusk before dinner to appreciate the neon-lit energy of Kabukicho entertainment district.",
         type: "sightseeing",
@@ -101,6 +112,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "19:00",
         name: "Dinner at Ichiran Ramen (Shinjuku)",
+        address: "Shinjuku, Shinjuku City, Tokyo, Japan",
         description:
           "A quintessential Tokyo ramen experience. Ichiran's solo booth dining concept lets you customize your tonkotsu ramen to your exact preference. Open late — ideal for a relaxed dinner after exploring.",
         type: "food",
@@ -116,6 +128,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "09:00",
         name: "Imperial Palace East Gardens",
+        address: "1-1 Chiyoda, Chiyoda City, Tokyo, Japan",
         description:
           "Start the day at the historic heart of Tokyo. The East Gardens of the Imperial Palace are open to the public and contain ruins of the old Edo Castle. Peaceful morning walks with Japanese garden scenery and koi ponds.",
         type: "history",
@@ -123,6 +136,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "10:30",
         name: "Nihonbashi Neighborhood Walk",
+        address: "Nihonbashi, Chuo City, Tokyo, Japan",
         description:
           "A short walk from the palace, Nihonbashi is Tokyo's historic merchant and financial district. See the original Nihonbashi bridge (the geographic center of Japan's road network), traditional department stores, and Edo-era architecture.",
         type: "culture",
@@ -130,6 +144,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "12:00",
         name: "Lunch at Fuji Ramen (Shibuya area) or Ramen Street",
+        address: "Shibuya, Shibuya City, Tokyo, Japan",
         description:
           "Head to Shibuya for lunch. Tokyo Ramen Street inside Tokyo Station (a short detour) features eight acclaimed ramen shops under one roof — an excellent final ramen stop to compare styles from your trip.",
         type: "food",
@@ -137,6 +152,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "14:00",
         name: "Shibuya Crossing & Scramble Square Observation Deck",
+        address: "Shibuya, Shibuya City, Tokyo, Japan",
         description:
           "Experience the world-famous Shibuya Scramble Crossing on foot, then head up to the Shibuya Sky observation deck on the 46th floor of Scramble Square for panoramic views of Tokyo. Book tickets in advance online.",
         type: "sightseeing",
@@ -144,6 +160,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "16:00",
         name: "Daikanyama & Nakameguro Stroll",
+        address: "Daikanyamacho, Shibuya City, Tokyo, Japan",
         description:
           "Walk 15 minutes south to the stylish, tree-lined neighborhoods of Daikanyama and Nakameguro. Browse independent boutiques, visit the iconic Tsutaya Books, and walk along the Meguro River canal — beautiful at golden hour.",
         type: "sightseeing",
@@ -151,6 +168,7 @@ export const DEMO_ITINERARY: ItineraryDay[] = [
       {
         time: "19:00",
         name: "Farewell Dinner at Nakiryu (Michelin-starred Ramen, Otsuka)",
+        address: "Minamiotsuka, Toshima City, Tokyo, Japan",
         description:
           "End your Tokyo trip with a bowl of Michelin-starred tantanmen ramen at Nakiryu. Arrive by 18:00 to secure a place in line — the restaurant is small and fills up fast. A memorable, fitting finale to a food-focused trip.",
         type: "food",

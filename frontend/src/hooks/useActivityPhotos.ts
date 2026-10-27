@@ -1,8 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useKeyedAsync } from "@/hooks/useKeyedAsync";
 import type { ActivityPhoto } from "@/lib/types";
 import { fetchActivityPhotos, type PhotoQuery } from "@/lib/wikiPhotos";
+
+type Photos = Record<string, ActivityPhoto | null>;
+
+function loadPhotos(key: string): Promise<Photos> {
+  const [destination, activities] = JSON.parse(key) as [string | null, PhotoQuery[]];
+  return fetchActivityPhotos(activities, destination);
+}
 
 /**
  * Wikipedia photos for the given activities, keyed by activity name (one day at a
@@ -11,34 +18,13 @@ import { fetchActivityPhotos, type PhotoQuery } from "@/lib/wikiPhotos";
 export function useActivityPhotos(
   activities: PhotoQuery[],
   destination: string | null,
-): Record<string, ActivityPhoto | null> | null {
-  // A stable key so a new array with the same activities doesn't refetch.
-  const key = JSON.stringify([
-    destination,
-    activities.map(({ name, description, type }) => ({ name, description, type })),
-  ]);
-  const [result, setResult] = useState<{
-    key: string;
-    photos: Record<string, ActivityPhoto | null>;
-  } | null>(null);
-
-  useEffect(() => {
-    const [dest, list] = JSON.parse(key) as [string | null, PhotoQuery[]];
-    if (list.length === 0) return;
-    let cancelled = false;
-
-    fetchActivityPhotos(list, dest)
-      .then((photos) => {
-        if (!cancelled) setResult({ key, photos });
-      })
-      .catch(() => {
-        if (!cancelled) setResult({ key, photos: {} });
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [key]);
-
-  return result?.key === key ? result.photos : null;
+): Photos | null {
+  const key =
+    activities.length > 0
+      ? JSON.stringify([
+          destination,
+          activities.map(({ name, description, type }) => ({ name, description, type })),
+        ])
+      : null;
+  return useKeyedAsync(key, loadPhotos, {});
 }

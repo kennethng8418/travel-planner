@@ -165,6 +165,53 @@ body {
   }
 }
 
+/* ── Day map ─────────────────────────────────────────────────── */
+
+.map-pin {
+  display: flex;
+  height: 28px;
+  width: 28px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 2px solid #fff;
+  color: #fff;
+  font: 700 12px/1 var(--font-dm-sans), system-ui, sans-serif;
+  box-shadow: 0 4px 12px rgba(10, 45, 60, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.map-pin:hover {
+  transform: scale(1.12);
+}
+
+.maplibregl-popup-content {
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 12px 28px rgba(10, 45, 60, 0.18);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+.map-popup-time {
+  font: 600 10px/1.4 var(--font-geist-mono), monospace;
+  letter-spacing: 0.08em;
+  color: var(--accent-muted);
+}
+
+.map-popup-name {
+  margin-top: 2px;
+  font: 600 14px/1.3 var(--font-fraunces), Georgia, serif;
+  color: var(--ink);
+}
+
+.map-popup-address {
+  margin-top: 4px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
 /* Palm fronds sway gently from the corner they hang off */
 .frond-sway {
   animation: frond-sway 9s ease-in-out infinite alternate;

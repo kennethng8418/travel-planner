@@ -53,6 +53,10 @@ npm run dev
 UI runs at `http://localhost:3000` and talks to the backend via WebSocket (`/ws/chat`).
 Set `NEXT_PUBLIC_API_URL` if the API is not on localhost:8000.
 
+**Destination photos (optional):** to show a photo of the destination in the trip banner, add an Unsplash **Access Key** (free at [unsplash.com/developers](https://unsplash.com/developers)) to `frontend/.env.local` as `UNSPLASH_ACCESS_KEY=...`, then restart `npm run dev`. It's read only on the server, so don't add a `NEXT_PUBLIC_` prefix. Without it, the banner uses a plain gradient. The free key allows 50 searches per hour, and each destination's photo is cached for a day. Activity photos come from Wikipedia and need no key.
+
+**Day maps:** `npm install` runs a `postinstall` script ([scripts/copy-maplibre-worker.mjs](frontend/scripts/copy-maplibre-worker.mjs)) that copies MapLibre's web worker into `frontend/public/maplibre/`. MapLibre v6 loads its worker from a separate file that the Next.js bundler can't find on its own. The folder is generated and git-ignored. If the day maps come up blank, for example after a fresh clone or after changing the `maplibre-gl` version, run `npm install` again.
+
 ## API Endpoints
 
 ### POST /chat

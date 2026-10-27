@@ -11,7 +11,8 @@ export interface ItineraryActivity {
   time: string;
   name: string;
   description: string;
-  location?: string;
+  /** Street address, or just "neighborhood, city, country" when the planner wasn't sure. */
+  address?: string;
   type?: ActivityType;
 }
 
